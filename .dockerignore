@@ -3,6 +3,5 @@
 .vscode
 .idea
 *.log
-*.sql
 interview_database.md
 implementation_plan.md
