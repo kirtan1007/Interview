@@ -1,0 +1,197 @@
+/* Global Styles & Variables */
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --secondary-bg: #f9fafb;
+    --dark-bg: #111827;
+    --border-color: #e5e7eb;
+    --text-main: #374151;
+    --text-muted: #6b7280;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-main);
+    background-color: var(--secondary-bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card Styling */
+.card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: #ffffff;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-color);
+    border-top-left-radius: var(--radius-md) !important;
+    border-top-right-radius: var(--radius-md) !important;
+}
+
+/* Sidebar Styles (Admin Dashboard) */
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 56px;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+        padding: 48px 0 0;
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    }
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.sidebar .nav-link.active {
+    color: #ffffff !important;
+}
+
+.sidebar .hover-bg:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar .hover-bg-danger:hover {
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+/* Custom Table Controls */
+.table-responsive {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background-color: #ffffff;
+    box-shadow: var(--shadow-sm);
+}
+
+.table th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Log-in (Glassmorphic) Container */
+.login-container {
+    max-width: 440px;
+    margin: 80px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Responsive Grid Buttons */
+.nav-badge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 8px;
+}
+
+.nav-badge {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 2px solid var(--border-color);
+    background-color: #ffffff;
+    color: var(--text-main);
+    text-decoration: none;
+}
+
+.nav-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.nav-badge.active {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+.nav-badge.answered {
+    background-color: #10b981;
+    border-color: #10b981;
+    color: #ffffff;
+}
+
+.nav-badge.unanswered {
+    background-color: #f3f4f6;
+    border-color: #d1d5db;
+    color: #374151;
+}
+
+/* Custom Answer Key Styles */
+.option-box {
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 14px 20px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.option-box:hover {
+    background-color: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+.option-box.selected {
+    border-color: var(--primary-color);
+    background-color: rgba(79, 70, 229, 0.05);
+}
+
+.option-box.correct {
+    border-color: #10b981;
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+.option-box.wrong {
+    border-color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* Print Prevention Protection */
+@media print {
+    body {
+        display: none !important;
+    }
+}
