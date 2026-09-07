@@ -168,9 +168,12 @@ require_once __DIR__ . '/../includes/header.php';
                                     Next <i class="bi bi-arrow-right ms-1"></i>
                                 </button>
                             <?php else: ?>
-                                <button type="button" class="btn btn-success px-4 py-2 fw-bold" data-bs-toggle="modal" data-bs-target="#confirmSubmitModal">
-                                    <i class="bi bi-check2-circle me-1"></i> SUBMIT TEST
-                                </button>
+                                <form action="submit_test.php" method="POST" class="d-inline" onsubmit="this.querySelector('button').disabled = true; this.querySelector('button').innerHTML = '<span class=\'spinner-border spinner-border-sm me-1\'></span> Submitting...';">
+                                    <input type="hidden" name="csrf_token" value="<?php echo $csrf_token_val; ?>">
+                                    <button type="submit" class="btn btn-success px-4 py-2 fw-bold">
+                                        <i class="bi bi-check2-circle me-1"></i> SUBMIT TEST
+                                    </button>
+                                </form>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -222,39 +225,17 @@ require_once __DIR__ . '/../includes/header.php';
                 </div>
 
                 <div class="mt-4 pt-3 border-top">
-                    <button type="button" class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#confirmSubmitModal">
-                        Submit Entire Test
-                    </button>
+                    <form action="submit_test.php" method="POST" onsubmit="this.querySelector('button').disabled = true; this.querySelector('button').innerHTML = '<span class=\'spinner-border spinner-border-sm me-1\'></span> Submitting...';">
+                        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token_val; ?>">
+                        <button type="submit" class="btn btn-outline-danger w-100 fw-bold">
+                            <i class="bi bi-check2-circle me-1"></i> Submit Test
+                        </button>
+                    </form>
                 </div>
 
             </div>
         </div>
     </div>
-</div>
-
-<!-- Beautiful Bootstrap Confirmation Modal -->
-<div class="modal fade" id="confirmSubmitModal" tabindex="-1" aria-labelledby="confirmSubmitModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg">
-            <div class="modal-header border-0 pb-0">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center p-4">
-                <div class="text-danger mb-3">
-                    <i class="bi bi-exclamation-triangle-fill fs-1"></i>
-                </div>
-                <h4 class="fw-bold mb-2">Submit Interview Test?</h4>
-                <p class="text-muted mb-4">Are you sure you want to submit the test? You cannot attempt the test again after submission.</p>
-                
-                <form id="test-form" action="submit_test.php" method="POST">
-                    <input type="hidden" name="csrf_token" value="<?php echo get_csrf_token(); ?>">
-                    <div class="d-flex gap-2 justify-content-center">
-                        <button type="button" class="btn btn-light px-4 py-2" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger px-4 py-2 fw-bold">Submit Test</button>
-                    </div>
-                </form>
-            </div>
-        </div>
 </div>
 
 <!-- Hidden config parameters read by exam-security.js -->
