@@ -73,10 +73,20 @@ $page_title = "Evaluation Results";
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
-    <h1 class="h2 fw-bold text-dark"><i class="bi bi-journal-check text-primary me-2"></i>Test Results</h1>
-    <div class="btn-toolbar mb-2 mb-md-0">
-        <span class="badge bg-light text-dark border p-2">Passing Benchmark: <?php echo escape(get_setting('passing_percentage', '40')); ?>%</span>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom gap-2">
+    <h1 class="h2 fw-bold text-dark mb-0"><i class="bi bi-journal-check text-primary me-2"></i>Test Results</h1>
+    <div class="btn-toolbar mb-2 mb-md-0 d-flex flex-wrap gap-2 align-items-center">
+        <span class="badge bg-light text-dark border p-2 me-1">Passing Benchmark: <?php echo escape(get_setting('passing_percentage', '40')); ?>%</span>
+        
+        <!-- Download PASS Students Excel -->
+        <a href="export_results.php?type=pass" class="btn btn-success btn-sm px-3 py-1.5 shadow-sm fw-semibold" title="Download Passed Students in Excel format">
+            <i class="bi bi-file-earmark-excel-fill me-1"></i> Download PASS (Excel)
+        </a>
+
+        <!-- Download FAIL Students Excel -->
+        <a href="export_results.php?type=fail" class="btn btn-danger btn-sm px-3 py-1.5 shadow-sm fw-semibold" title="Download Failed Students in Excel format">
+            <i class="bi bi-file-earmark-excel-fill me-1"></i> Download FAIL (Excel)
+        </a>
     </div>
 </div>
 
