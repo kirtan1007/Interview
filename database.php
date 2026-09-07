@@ -1,9 +1,9 @@
 <?php
-$host = getenv('DB_HOST') ?: "localhost";
+$host = getenv('DB_HOST') ?: "127.0.0.1";
 $port = getenv('DB_PORT') ?: "3306";
 $db   = getenv('DB_NAME') ?: "interview";
 $user = getenv('DB_USER') ?: "root";
-$pass = getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : (getenv('DB_PASS') !== false ? getenv('DB_PASS') : ""); // Configurable (XAMPP default is empty)
+$pass = getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : (getenv('DB_PASS') !== false ? getenv('DB_PASS') : "");
 $charset = "utf8mb4";
 
 $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
@@ -14,19 +14,20 @@ $options = [
 ];
 
 try {
-     $pdo = new PDO($dsn, $user, $pass, $options);
+    $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-     // Do not expose database credentials or details in production
-     error_log("Database connection error: " . $e->getMessage());
-     die("<div style='padding: 20px; font-family: sans-serif; background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; border-radius: 6px; margin: 20px auto; max-width: 600px;'>
-            <h3>Database Connection Failed</h3>
-            <p>Could not connect to the database <strong>interview</strong>.</p>
-            <p>Please ensure that:</p>
-            <ul>
-                <li>Your local server (like XAMPP, WampServer or Docker MySQL) is running.</li>
-                <li>You have imported the database tables from <a href='interview_database.md'>interview_database.md</a>.</li>
-                <li>The login credentials in <code>database.php</code> match your local MySQL configuration.</li>
-            </ul>
-          </div>");
+    // Fallback: If default root connection fails (common on cloud containers), try container's dedicated user
+    try {
+        $dsn_fallback = "mysql:host=127.0.0.1;port=3306;dbname=$db;charset=$charset";
+        $pdo = new PDO($dsn_fallback, "interview_user", "Interview@123", $options);
+    } catch (\PDOException $e2) {
+        error_log("Database connection error: " . $e->getMessage() . " | " . $e2->getMessage());
+        die("<div style='padding: 20px; font-family: sans-serif; background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; border-radius: 6px; margin: 20px auto; max-width: 650px;'>
+               <h3>Database Connection Failed</h3>
+               <p>Could not connect to the database <strong>" . htmlspecialchars($db) . "</strong>.</p>
+               <p><strong>Connection Error:</strong> " . htmlspecialchars($e->getMessage()) . "</p>
+               <p><strong>Container Error:</strong> " . htmlspecialchars($e2->getMessage()) . "</p>
+             </div>");
+    }
 }
 ?>
