@@ -1,11 +1,12 @@
 <?php
-$host = "localhost";
-$db = "interview";
-$user = "root";
-$pass = ""; // Configurable (XAMPP default is empty)
+$host = getenv('DB_HOST') ?: "localhost";
+$port = getenv('DB_PORT') ?: "3306";
+$db   = getenv('DB_NAME') ?: "interview";
+$user = getenv('DB_USER') ?: "root";
+$pass = getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : (getenv('DB_PASS') !== false ? getenv('DB_PASS') : ""); // Configurable (XAMPP default is empty)
 $charset = "utf8mb4";
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
