@@ -189,6 +189,150 @@ body {
     animation: fadeIn 0.3s ease forwards;
 }
 
+/* ==========================================================
+   Mobile UI/UX Optimizations (Responsive for all phones)
+   ========================================================== */
+
+/* Touch & tap feedback */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 0.95rem;
+    }
+
+    /* Container Spacing for Small Screens */
+    .container, .container-fluid {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    /* Login Form on Mobile */
+    .login-container {
+        margin: 20px auto;
+        padding: 24px 18px;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-md);
+    }
+
+    /* Prevent auto-zoom on iOS input focus */
+    input.form-control, select.form-select, textarea.form-control {
+        font-size: 16px !important;
+    }
+
+    /* Card Padding & Headers on Mobile */
+    .card-body {
+        padding: 1.25rem !important;
+    }
+
+    .card-header {
+        padding: 0.75rem 1rem !important;
+    }
+
+    /* Question Header Badges on Mobile */
+    #current-q-badge {
+        font-size: 0.85rem !important;
+        padding: 6px 12px !important;
+    }
+
+    #test-timer {
+        font-size: 1.1rem !important;
+        font-weight: 700;
+    }
+
+    /* Question Text scaling */
+    .question-slide h4 {
+        font-size: 1.15rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    /* Touch-Friendly Option Cards for Phone Screens */
+    .option-box {
+        padding: 12px 14px;
+        margin-bottom: 10px;
+        border-radius: var(--radius-md);
+        min-height: 48px;
+        font-size: 0.95rem;
+        word-break: break-word;
+    }
+
+    .option-box .form-check-input {
+        width: 1.2em;
+        height: 1.2em;
+        margin-top: 0.1em;
+        flex-shrink: 0;
+    }
+
+    .option-box label {
+        line-height: 1.4;
+    }
+
+    /* Navigation Buttons (Prev / Next / Submit) on Mobile */
+    .switch-q-btn, 
+    .question-slide .btn {
+        padding: 10px 18px !important;
+        font-size: 0.95rem !important;
+        font-weight: 600;
+        border-radius: var(--radius-sm);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Question Number Badges Grid for Mobile */
+    .nav-badge-grid {
+        grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+        gap: 6px;
+    }
+
+    .nav-badge {
+        height: 36px;
+        width: 100%;
+        min-width: 36px;
+        font-size: 0.85rem;
+        border-radius: 8px;
+    }
+
+    /* Mobile Table horizontal swipe friendly */
+    .table-responsive {
+        border: none;
+        border-radius: var(--radius-sm);
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        font-size: 0.875rem;
+    }
+
+    .table td, .table th {
+        padding: 0.65rem 0.5rem;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra small phone screens (e.g., iPhone SE, standard Android) */
+    .login-container {
+        padding: 20px 14px;
+    }
+
+    .navbar-brand {
+        font-size: 1.05rem;
+    }
+
+    .nav-badge-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+    }
+
+    .question-slide h4 {
+        font-size: 1.05rem;
+    }
+}
+
 /* Print Prevention Protection */
 @media print {
     body {
